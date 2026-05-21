@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bdcbmhwappikc"]
+
+[ext_resource type="Texture2D" uid="uid://nai78gcedwp0" path="res://icon.svg" id="1_oj8hd"]
+[ext_resource type="PackedScene" uid="uid://df073bsw7g75j" path="res://player/player.tscn" id="2_gnif3"]
+[ext_resource type="PackedScene" uid="uid://cu2p4l3fl4h3t" path="res://assetts/HOUSE.glb" id="3_lwy2l"]
+[ext_resource type="PackedScene" uid="uid://t8tjhnxk0pc4" path="res://assetts/sword.blend.glb" id="4_nj2yk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gnif3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_lwy2l"]
+sky_material = SubResource("ProceduralSkyMaterial_gnif3")
+
+[sub_resource type="Environment" id="Environment_nj2yk"]
+background_mode = 2
+sky = SubResource("Sky_lwy2l")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4q20e"]
+size = Vector3(20, 1, 30.348145)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnif3"]
+albedo_texture = ExtResource("1_oj8hd")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lwy2l"]
+size = Vector3(2, 1, 1)
+
+[node name="level" type="Node3D" unique_id=1214605893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7152269, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1018071052]
+environment = SubResource("Environment_nj2yk")
+
+[node name="floor" type="StaticBody3D" parent="." unique_id=1620144483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.43640733, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor" unique_id=1122877422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7434082, 0, 4.1689243)
+shape = SubResource("BoxShape3D_4q20e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor/CollisionShape3D" unique_id=176223315]
+transform = Transform3D(10.015629, 0, 0, 0, 1, 0, 0, 0, 19.62003, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_gnif3")
+mesh = SubResource("BoxMesh_lwy2l")
+
+[node name="player" parent="." unique_id=1542477686 instance=ExtResource("2_gnif3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0262434, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2113006841]
+transform = Transform3D(1, 0, 0, 0, 0.01743498, 0.999848, 0, -0.999848, 0.01743498, 0, 21.449362, 0)
+shadow_enabled = true
+
+[node name="HOUSE" parent="." unique_id=946960503 instance=ExtResource("3_lwy2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.055361, 0.31663108, 14.428381)
+
+[node name="sword_blend" parent="." unique_id=1970673938 instance=ExtResource("4_nj2yk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16400051, 0.93181205, 1.8755169)
